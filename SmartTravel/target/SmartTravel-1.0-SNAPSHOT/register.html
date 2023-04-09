@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="./css/css.css">
+</head>
+<body>
+<div class="wrap">
+    <div class="form">
+        <div class="left">
+            <video src="video/video.mp4" muted loop autoplay></video>
+        </div>
+        <div class="right">
+            <div class="right-con">
+
+                <h1>欢迎回来</h1>
+                <form action="userSystem"  method="post">
+                    <h3>姓名</h3>
+                    <input class="text" type="text" name="username">
+
+                    <h3>密码</h3>
+                    <input class="text" type="password" name="password">
+
+                    <input type="radio" value="0" name="sex">女
+                    <input type="radio" value="1" name="sex">男 <br>
+                    <input type="radio" value="1" name="usertype">管理员
+                    <input type="radio" value="0" name="usertype">用户
+                    <input type="text" name="method" value="addUser" style="display:none ">
+
+                   <input type="submit" class = "btn" value="注册">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

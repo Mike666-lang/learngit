@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#navbar {
+    width: 100%;
+    height: 100px;
+    background-color: darkgray;
+    line-height: 100px;
+    font-size: 36px;
+    color: lightskyblue;
+    text-indent: 2em;
+}
+
+table, tr, td, th {
+    border: 1px silver solid;
+}
+
+table {
+    width: 300px;
+    margin: auto;
+}
+
+td {
+    text-align: center;
+}

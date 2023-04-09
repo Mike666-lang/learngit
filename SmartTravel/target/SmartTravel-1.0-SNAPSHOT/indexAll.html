@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>智慧出行</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <script src="jquery/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+<!--隐藏模块-->
+
+<div class="container" id="happy" style="display: none">
+    <div class="row">
+        <div class="col-md-12 ">
+            <form class="form-horizontal">
+                <!-- 表单区域-->
+                <fieldset>
+                    <!--                    <input type="text" name="method" value="updateUser" style="display:none ">-->
+                    <!--表单主题-->
+                    <legend>修改用户</legend>
+                    <!-- 每一个form-group都可以自定义布局-->
+
+                    <div class="form-group">
+                        <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                        <label class="col-md-2 control-label" for="mid">用户Id</label>
+                        <div class="col-md-4">
+                            <input class="form-control" name="id" id="id" v-model="findList.id" onfocus=this.blur()
+                                   type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                        <label class="col-md-2 control-label" for="mid">用户名称</label>
+                        <div class="col-md-4">
+                            <input class="form-control" name="username" id="mid" v-model="findList.username"
+                                   type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                        <label class="col-md-2 control-label" for="password">用户密码</label>
+                        <div class="col-md-4">
+                            <input class="form-control" name="password" id="password" v-model="findList.password"
+                                   type="text"/>
+                        </div>
+                    </div>
+
+                    <!--                    <div class="form-group">-->
+                    <!--                        &lt;!&ndash; label表示文字提示标签,可以通过表单的组建的id提示&ndash;&gt;-->
+                    <!--                        <label class="col-md-2 control-label" for="con">确认密码</label>-->
+                    <!--                        <div class="col-md-4">-->
+                    <!--                            <input class="form-control" id="con" type="password"/>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">身份</label>
+                        <div class="col-md-5">
+                            <div class="radio-inline">
+                                <input type="radio" name="usertype" id="admin" value="0" checked/>管理员
+                            </div>
+                            <div class="radio-inline">
+                                <input type="radio" name="usertype" v-model="findList.usertype" id="user" value="1"/>用户
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">性别</label>
+                        <div class="col-md-5">
+                            <div v-if="findList.sex === 0">
+                                <input type="radio" name="sex" checked>男
+                                <input type="radio" name="sex" id="female" value="1">女
+                            </div>
+                            <div v-else>
+                                <input type="radio" name="sex" id=value="0">男
+                                <input type="radio" name="sex" value="1" checked>女
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="city">所在城市</label>
+                        <div class="col-md-4">
+                            <select id="city" name="address" v-model="findList.address" class="form-control">
+                                <option name="" value="中国">中国</option>
+                                <option value="小日子">小日子</option>
+                                <option value="新乡">新乡</option>
+                                <option value="安阳">安阳</option>
+                                <option value="郑州">郑州</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                        <label class="col-md-2 control-label" for="mid">车库Id</label>
+                        <div class="col-md-4">
+                            <input class="form-control" name="garage_num" id="garage" v-model="findList.garage_num"
+                                   type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                        <label class="col-md-2 control-label" for="mid">ETC编号</label>
+                        <div class="col-md-4">
+                            <input class="form-control" name="etc_num" id="etc" v-model="findList.etc_num" type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button class="btn btn-primary" @click="updateUser">提交</button>
+                            <input class="btn btn-warning" type="reset" value="重置"/>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--隐藏结束-->
+<div id="app">
+    <div style="" id="exciting">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="indexAll.html">智慧出行</a>
+                </div>
+                <div>
+                    <div class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <div>
+                                <select id="select_value" class="form-select" aria-label="Default select example"
+                                        v-model="choose">
+                                    <span>{{choose}}</span>
+                                    <option value="username">用户名</option>
+                                    <option value="etc_num">Etc</option>
+                                    <option value="address">地址</option>
+                                </select>
+                            </div>
+
+
+                            <input type="text" class="form-control" name="" id="keyword" placeholder="Search"
+                                   v-model="keyword">
+                        </div>
+                        <button @click="jump()" class="btn btn-default">搜索</button>
+                    </div>
+                    <ul class="pager">
+                        <li><a href="addUser.html">添加</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <button @click="getUserInfo">查看数据</button>
+        <table class="table table-bordered">
+            <!--        <caption>边框表格布局</caption>-->
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>名字</th>
+                <th>用户属性</th>
+                <th>性别</th>
+                <th>地址</th>
+                <th>车库编号</th>
+                <th>etc编号</th>
+                <th>密码</th>
+                <th>操作</th>
+            </tr>
+
+            <!--            <tr v-for="user in userList">-->
+            <!--                <td v-for="(value, key) in user" v-if="key ==='sex'">-->
+            <!--                    {{value ? '男' : '女'}}-->
+            <!--                    &lt;!&ndash;        <td v-show="key ==='usertype'">&ndash;&gt;-->
+            <!--                    &lt;!&ndash;            {{value ? '管理员' : '普通用户'}}&ndash;&gt;-->
+            <!--                    &lt;!&ndash;        <td v-else>{{value}}</td>&ndash;&gt;-->
+            <!--                </td>-->
+            <!--                <td v-else>{{value}}</td>-->
+
+
+            <!--                <td>-->
+            <!--                    <button type="button" id="modifyList" class="btn btn-primary" @click="findId(user.id)">修改</button>-->
+            <!--                    <button type="button" class="btn btn-danger" @click="deleteId(user.id)">删除</button>-->
+            <!--                </td>-->
+            <!--            </tr>-->
+            <tr v-for="user in userList">
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.usertype === 1 ? "管理员" : "用户"}}</td>
+                <td>{{user.sex === 0 ? "女" : "男"}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.garage_num}}</td>
+                <td>{{user.etc_num}}</td>
+                <td>{{user.password}}</td>
+                <td>
+                    <button type="button" id="modifyList" class="btn btn-primary" @click="findId(user.id)">修改</button>
+                    <button type="button" class="btn btn-danger" @click="deleteId(user.id)">删除</button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+
+    // 自动刷新
+    window.onload = function () {
+        ajaxGetUserInfo();
+    };
+
+    //保存当前的this
+
+    var v1 = new Vue({
+        el: "#app",
+        data: {
+            userList: "",
+            username: "",
+            keyword: "",
+            choose: ""
+        },
+        methods: {
+            getUserInfo: function () {
+                ajaxGetUserInfo();
+            }
+        }
+    });
+
+    function jump() {
+        console.log("正常进入");
+        console.log(v1.username);
+        window.location.href = "/searchUser1.html?" + v1.choose + "=" + v1.keyword;
+    }
+
+    var v2 = new Vue({
+        el: "#happy",
+        data: {
+            findList: "",
+            man: 0,
+            women: 1
+        },
+        methods: {}
+
+    });
+
+
+    function updateUser() {
+        let id = $("#id").val();
+        let username = $("#mid").val();
+        let password = $("#password").val();
+
+
+        let address = $("#city").val();
+        let garage_num = $("#garage").val();
+        let etc_num = $("#etc").val();
+        $.ajax({
+            url: "http://localhost:8080/userSystem?",
+            data: {
+                method: "updateUser",
+                id: id,
+                username: username,
+                password: password,
+                address: address,
+                garage_num: garage_num,
+                etc_num: etc_num
+
+            },
+            type: "get",
+            dataType: "json",
+            contentType: 'application/json;charset=utf-8',
+            success: function (ret) {
+                if (ret == 0)
+                    alert("成功了");
+            },
+            error: function () {
+                alert("有问题，再试试");
+            }
+        });
+
+    }
+
+    // 修改学生信息
+    function findId(id) {
+        $("#happy").css({
+            "display": "block"
+        });
+        $("#exciting").css({
+            "display": "none"
+        });
+
+        $.ajax({
+            url: "http://localhost:8080/userSystem?",
+            data: {
+                method: "findUserById",
+                id: id,
+
+
+            },
+            type: "get",
+            dataType: "json",
+            success: function (ret) {
+                v2.findList = ret;
+            },
+            error: function () {
+                alert("有问题，再试试");
+            }
+        });
+    }
+
+    // 删除方法实现过程
+    function deleteId(id) {
+
+        console.log("ID: " + id);
+        $.ajax({
+            url: "http://localhost:8080/userSystem?",
+            data: {
+                method: "delUser",
+                id: id
+            },
+            type: "get",
+            dataType: "json",
+            success: function (ret) {
+                if (ret) {
+                    alert("删除成功");
+                    location.reload();
+                } else {
+                    alert("删除有问题~");
+                }
+            },
+            error: function () {
+                alert("无数据");
+            }
+        });
+    }
+
+
+    // 查询所有学生
+    function ajaxGetUserInfo() {
+        $.ajax({
+            url: "http://localhost:8080/userSystem?method=allUser",
+            type: "get",
+            dataType: "json",
+            success: function (ret) {
+                v1.userList = ret;
+            },
+            error: function () {
+                alert("无数据");
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
